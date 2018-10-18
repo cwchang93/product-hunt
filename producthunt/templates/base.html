@@ -1,0 +1,106 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  {% load staticfiles %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Jinwei's Product</title>
+  <link rel="shortcut icon" href="/Users/cwchang/Desktop/if_letter_J_blue_1553054.png" type="image/x-icon" />
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<style>
+.jumbotron.text-center{background-color:transparent!important;}
+h2.mb-5 {padding: 1em 0;}
+.mb-5{border-top: 1px solid #c3c3c3;padding-top: 2em; }
+
+</style>
+
+
+</head>
+
+<body>
+
+  <header>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+      <a class="navbar-brand" href="{% url 'home' %}">
+       <img src="{% static 'plogo.png' %}" height=30 width=30 class="d-inline-block align-top" />
+       Product Hunt
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ml-auto">
+          {% if user.is_authenticated %}
+          <a class="nav-item nav-link" href="javascript:{document.getElementById('logout').submit()}">Log out</a>
+          <form id="logout" method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <input type="hidden" />
+          {% else %}
+          <a class="nav-item nav-link" href="{% url 'signup' %}">Sign Up</a>
+          <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+          {% endif %}
+        </div>
+      </div>
+      </div>
+    </nav>
+  </header>
+
+  <main role="main">
+    <a id="About"></a>
+    <section class="jumbotron text-left">
+      <div class="container">
+        <h1 class="jumbotron-heading mt-5">Hi, Welcome to Jinwei's Product Hunt!</h1>
+        <p class="lead text-muted">{% block content %}{% endblock %}
+        </p>
+
+<!--
+        <p>
+          <a href="" target="_blank" class="btn btn-primary my-2">LinkedIn</a>
+          <a href="" class="btn btn-danger my-2">Resume</a>
+          <a href="#" class="btn btn-secondary my-2">Email Me</a>
+        </p>
+-->
+      </div>
+    </section>
+
+
+
+
+  </main>
+
+  <footer class="text-muted">
+    <div class="container text-center">
+      <p>  Have Fun in {% now "Y" %} 🇹🇼 </p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  <!-- 頁籤 -->
+  <script>
+  $(document).ready(function(){
+      $(".nav-tabs a").click(function(){
+          $(this).tab('show');
+      });
+      $('.nav-tabs a').on('shown.bs.tab', function(event){
+          var x = $(event.target).text();         // active tab
+          var y = $(event.relatedTarget).text();  // previous tab
+          $(".act span").text(x);
+          $(".prev span").text(y);
+      });
+  });
+  </script>
+
+
+</body>
+</html>
